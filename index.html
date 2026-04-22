@@ -53,6 +53,12 @@ body {
   background:var(--gold-bg);
 }
 
+.gameplan-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--card);
+}
 /* ── HERO ────────────────────────────────────────────────── */
 .hero {
   position:relative;
@@ -326,11 +332,11 @@ body {
         <div class="val white" id="statTotal">--</div>
       </div>
       <div class="summary-item">
-        <div class="lbl">On Route</div>
+        <div class="lbl">Total Routes</div>
         <div class="val" id="statRescue">--</div>
       </div>
       <div class="summary-item">
-        <div class="lbl">Helpers</div>
+        <div class="lbl">Rescues / Splits</div>
         <div class="val" id="statHelper">--</div>
       </div>
       <div class="summary-item">
@@ -438,18 +444,16 @@ function processData(rows) {
   });
 
   // Summary counts
-  var rescue=0, helper=0, other=0;
+  var routes=0, rescues=0;
   valid.forEach(function(r){
-    var rt = str(r[G_ROUTE]).toLowerCase();
-    if(rt==='rescue') rescue++;
-    else if(rt.includes('helper')) helper++;
-    else other++;
+    var rt = str(r[G_ROUTE]).toUpperCase();
+    if(rt.includes('CX')) routes++;
+    if(rt.includes('RESCUE') || rt.includes('SPLIT')) rescues++;
   });
-  document.getElementById('statTotal').textContent  = valid.length || '--';
-  document.getElementById('statRescue').textContent = rescue || '--';
-  document.getElementById('statHelper').textContent = helper || '--';
-  document.getElementById('statOther').textContent  = other  || '--';
-
+  document.getElementById('statTotal').textContent   = valid.length || '--';
+  document.getElementById('statRescue').textContent  = routes  || '--';
+  document.getElementById('statHelper').textContent  = rescues || '--';
+  document.getElementById('statOther').textContent   = (valid.length - routes - rescues) || '--';
   renderLegend();
   renderTable(valid);
 }
