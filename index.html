@@ -414,9 +414,9 @@ body {
         <span class="ci">
           <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </span>
-        Driver Assignments &mdash; Sorted by Wave Time
+        Driver Assignments &mdash; Sorted by Name
       </div>
-      <div style="overflow-x:auto; overflow-y:auto; max-height:75vh;">
+      <div style="overflow-x:auto; overflow-y:auto; max-height:85vh;">
         <table class="gameplan-table" id="gameplanTable">
           <thead>
             <tr>
@@ -488,14 +488,9 @@ function processData(rows) {
   // Filter out blank names
   var valid = rows.filter(function(r){ return str(r[G_NAME]); });
 
-  // Sort by wave time — blanks go last
+  // Sort by name alphabetically
   valid.sort(function(a,b){
-    var ta = parseTime(str(a[G_WAVE]));
-    var tb = parseTime(str(b[G_WAVE]));
-    if(ta===null && tb===null) return 0;
-    if(ta===null) return 1;
-    if(tb===null) return -1;
-    return ta - tb;
+    return str(a[G_NAME]).localeCompare(str(b[G_NAME]));
   });
 
   // Summary counts
