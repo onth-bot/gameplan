@@ -54,10 +54,13 @@ body {
 }
 
 .gameplan-table thead th {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: var(--card);
+  font-family:'DM Mono',monospace; font-size:9px;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:var(--muted); padding:8px 10px;
+  border-bottom:1px solid var(--border);
+  text-align:left; white-space:nowrap;
+  position:sticky; top:0; z-index:10;
+  background:var(--card);
 }
 /* ── HERO ────────────────────────────────────────────────── */
 .hero {
@@ -357,7 +360,7 @@ body {
         </span>
         Driver Assignments &mdash; Sorted by Wave Time
       </div>
-      <div style="overflow-x:auto;">
+      <div style="overflow-x:auto; overflow-y:auto; max-height:75vh;">
         <table class="gameplan-table" id="gameplanTable">
           <thead>
             <tr>
