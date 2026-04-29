@@ -6,17 +6,21 @@
 <title>ONTH Driver Gameplan</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ── TOKENS ─────────────────────────────────────────────── */
 :root {
-  --black:      #0a0a0a;
-  --dark:       #111214;
-  --card:       #18191d;
-  --border:     #2a2c31;
-  --gold:       #f5c518;
-  --gold-bg:    rgba(245,197,24,0.08);
-  --gold-bd:    rgba(245,197,24,0.22);
-  --white:      #f0efe8;
-  --muted:      #78797f;
+  --black:    #080a0d;
+  --dark:     #0d1017;
+  --card:     #111520;
+  --border:   #1e2535;
+  --gold:     #00d4ff;
+  --gold2:    #40e4ff;
+  --gold-dim: #006e85;
+  --gold-bg:  rgba(0,212,255,0.07);
+  --gold-bd:  rgba(0,212,255,0.20);
+  --white:    #e8edf5;
+  --muted:    #4a5568;
+  --green:    #22d98a;
+  --red:      #ff4d6a;
+  --amber:    #ffb020;
 
   --rescue:     #e07b39;
   --rescue-bg:  rgba(224,123,57,0.12);
@@ -44,44 +48,32 @@ body {
 /* ── HERO ─────────────────────────────────────────────── */
 .hero {
   position:relative;
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  text-align:center;
-  padding:48px 20px 40px;
   background:var(--dark);
   overflow:hidden;
+  padding:32px 20px 28px;
 }
-.hero::before {
-  content:''; position:absolute; inset:0; pointer-events:none;
-  background:
-    radial-gradient(ellipse 80% 55% at 50% 0%, rgba(245,197,24,0.11) 0%, transparent 68%),
-    repeating-linear-gradient(0deg,  transparent, transparent 39px, rgba(255,255,255,0.015) 40px),
-    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.015) 40px);
-}
-.hero-badge {
-  position:relative; z-index:1;
-  display:inline-flex; align-items:center; gap:8px;
-  font-family:'DM Mono',monospace; font-size:10px;
-  letter-spacing:0.2em; text-transform:uppercase;
-  color:var(--gold); border:1px solid var(--gold-bd);
-  background:var(--gold-bg); padding:6px 16px;
-  border-radius:2px; margin-bottom:18px;
-  animation:fadeUp .5s ease both;
-}
+.hero::before{content:'';position:absolute;top:-60px;left:-80px;width:420px;height:420px;background:conic-gradient(from 200deg at 30% 40%,rgba(0,212,255,0.18) 0deg,rgba(0,212,255,0.04) 60deg,transparent 90deg);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent 0%,var(--gold) 40%,var(--gold2) 60%,transparent 100%);}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:40px 40px;}
+.hero-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.hero-badge{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);background:var(--gold-bg);border:1px solid var(--gold-bd);padding:5px 12px;border-radius:2px;}
 .hero-name {
-  position:relative; z-index:1;
+  position:relative; z-index:2;
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(44px,12vw,96px);
-  line-height:.92; letter-spacing:.025em;
-  animation:fadeUp .5s .08s ease both;
+  font-size:clamp(46px,13vw,88px);
+  line-height:0.88; letter-spacing:0.02em;
+  color:var(--white);
+  text-shadow:0 2px 40px rgba(0,212,255,0.12);
+  animation:nameReveal .7s ease both;
+  margin-bottom:8px;
 }
-.hero-name span { display:block; color:var(--gold); font-size:clamp(20px,5vw,40px); letter-spacing:.08em; }
+.hero-name span { display:block; color:var(--gold); font-size:clamp(20px,5vw,38px); letter-spacing:.06em; }
 .hero-meta {
-  position:relative; z-index:1;
-  margin-top:12px; font-family:'DM Mono',monospace;
-  font-size:10px; letter-spacing:.15em;
+  position:relative; z-index:2;
+  font-family:'DM Mono',monospace;
+  font-size:9px; letter-spacing:.15em;
   color:var(--muted); text-transform:uppercase;
-  animation:fadeUp .5s .16s ease both;
+  margin-top:10px;
 }
 
 /* ── WRAPPER ─────────────────────────────────────────────── */
@@ -137,7 +129,23 @@ body {
 .stat-val.gold { color:var(--gold); }
 .stat-val.sm { font-size:22px; }
 
-/* ── ROUTE CARD ───────────────────────────────────────────── */
+/* ── ROUTE HERO ───────────────────────────────────────────── */
+.route-hero {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,14vw,96px);
+  line-height:1; letter-spacing:.04em;
+  color:var(--gold); margin-bottom:6px;
+}
+.route-type-badge {
+  font-family:'DM Mono',monospace; font-size:11px;
+  padding:4px 14px; border-radius:2px; letter-spacing:.1em;
+  text-transform:uppercase; font-weight:500;
+}
+.route-type-badge.rescue  { background:var(--rescue-bg);  color:var(--rescue);  border:1px solid var(--rescue-bd); }
+.route-type-badge.helper  { background:var(--helper-bg);  color:var(--helper);  border:1px solid var(--helper-bd); }
+.route-type-badge.close   { background:var(--close-bg);   color:var(--close);   border:1px solid var(--close-bd); }
+.route-type-badge.cdat    { background:var(--cdat-bg);     color:var(--cdat);    border:1px solid var(--cdat-bd); }
+.route-type-badge.default { background:var(--gold-bg);    color:var(--gold);    border:1px solid var(--gold-bd); }
 .route-header {
   display:flex; align-items:center; gap:14px;
   margin-bottom:20px;
@@ -179,9 +187,9 @@ body {
   height:100%; border-radius:4px;
   transition:width .6s cubic-bezier(.22,1,.36,1);
 }
-.diff-fill.low    { background:#72dda0; }
-.diff-fill.medium { background:var(--gold); }
-.diff-fill.high   { background:#f0a0a0; }
+.diff-fill.low    { background:var(--green); }
+.diff-fill.medium { background:var(--amber); }
+.diff-fill.high   { background:var(--red); }
 
 /* ── ROUTE DETAIL ROW ─────────────────────────────────────── */
 .detail-row {
@@ -250,6 +258,10 @@ body {
   from { opacity:0; transform:translateY(14px); }
   to   { opacity:1; transform:none; }
 }
+@keyframes nameReveal {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:none; }
+}
 
 /* Spinner */
 .spin {
@@ -266,11 +278,15 @@ body {
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">DSJ5 · Driver Gameplan</div>
+  <div class="hero-grid"></div>
+  <div class="hero-top">
+    <div class="hero-badge">DSJ5 · Driver Gameplan</div>
+    <div class="hero-badge" id="dateBadge"></div>
+  </div>
   <div class="hero-name" id="heroName">
     <span>Loading...</span>
   </div>
-  <p class="hero-meta">DSJ5 &nbsp;&middot;&nbsp; Fresno, CA &nbsp;&middot;&nbsp; <span id="dateBadge"></span></p>
+  <p class="hero-meta">DSJ5 &nbsp;&middot;&nbsp; Fresno, CA</p>
 </section>
 
 <div class="wrapper" id="mainContent">
@@ -297,7 +313,7 @@ var API_URL = 'https://script.google.com/macros/s/AKfycbzLd7-DuwbqvCiRU-0pjw9NlO
 document.addEventListener('DOMContentLoaded', function () {
   var now = new Date();
   document.getElementById('dateBadge').textContent =
-    now.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric', year:'numeric' }).toUpperCase();
+    now.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' }).toUpperCase();
 
   var params = new URLSearchParams(window.location.search);
   var driver = params.get('driver') || params.get('name') || '';
@@ -312,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // ── FETCH ────────────────────────────────────────────────────
 function loadData(driver) {
-  var url = API_URL + '?driver=' + encodeURIComponent(driver);
+  var url = API_URL + '?driver=' + encodeURIComponent(driver) + '&mode=gameplan';
   fetch(url)
     .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(function (data) {
@@ -367,32 +383,28 @@ function render(data) {
   html += 'Assignment Details';
   html += '</div>';
 
-  // Route header
+  // Route header — larger display
   if (route) {
-    html += '<div class="route-header">';
-    html += '<span class="route-badge-lg ' + routeClass(route) + '">' + esc(route) + '</span>';
-    if (routeLabel && routeLabel !== route) {
-      html += '<span class="route-name-big">' + esc(routeLabel) + '</span>';
-    }
-    html += '</div>';
+    html += '<div class="route-hero">' + esc(route) + '</div>';
+    html += '<div class="route-type-badge ' + routeClass(route) + '" style="display:inline-block;margin-bottom:18px;">' + esc(routeClass(route) === 'default' ? route : routeClass(route).toUpperCase()) + '</div>';
   }
 
-  // Core stats grid
-  html += '<div class="stat-grid">';
-  html += statItem('Wave Time', wave || '—', wave ? 'gold' : '');
-  html += statItem('RTS w/ Breaks', rts  || '—', '');
+  // Core stats grid: Route/Assignment | Bag/Van | Wave Time
+  html += '<div class="stat-grid three">';
+  html += statItem('Route / Assignment', route || '—', route ? 'gold' : '');
+  html += statItem('Bag / Van',          van   || '—', '');
+  html += statItem('Wave Time',          wave  || '—', wave ? 'gold' : '');
   html += '</div>';
 
-  html += '<div class="stat-grid three" style="margin-top:8px;">';
-  html += statItem('Total Stops', stops || '—', stops ? 'gold' : '');
-  html += statItem('Bag / Van', van   || '—', '');
+  html += '<div class="stat-grid" style="margin-top:8px;">';
+  html += statItem('RTS w/ Breaks', rts || '—', '');
   html += '</div>';
 
   html += '</div>'; // .card
   html += '</div>'; // .section
 
   // ── ROUTE PROFILE ───────────────────────────────────────────
-  var hasRouteData = diffPct !== null || bizStops || apts;
+  var hasRouteData = diffPct !== null || bizStops || apts || stops;
   if (hasRouteData) {
     html += '<div class="section">';
     html += '<div class="section-label">Route Profile</div>';
@@ -412,12 +424,11 @@ function render(data) {
       html += '</div>';
     }
 
-    if (bizStops || apts) {
-      html += '<div class="detail-row">';
-      if (bizStops) html += statItem('Business Stops', bizStops, '');
-      if (apts)     html += statItem('Apartments', apts, '');
-      html += '</div>';
-    }
+    html += '<div class="detail-row" style="margin-top:14px;">';
+    if (stops) html += statItem('Total Stops', stops, 'gold');
+    if (bizStops) html += statItem('Business Stops', bizStops, '');
+    if (apts)     html += statItem('Apartments', apts, '');
+    html += '</div>';
 
     html += '</div>'; // .card
     html += '</div>'; // .section
