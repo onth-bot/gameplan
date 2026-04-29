@@ -4,51 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>ONTH Driver Gameplan</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 :root {
   --black:#07090d;
-  --dark:#0c111a;
-  --dark2:#101827;
+  --dark:#0d1320;
   --card:#111827;
   --card2:#151f31;
   --border:#263247;
-
-  --accent:#00d4ff;
-  --accent2:#54e8ff;
-  --accent-dim:#007f99;
-  --accent-bg:rgba(0,212,255,.08);
-  --accent-bd:rgba(0,212,255,.24);
-
+  --gold:#00d4ff;
+  --gold2:#54e8ff;
+  --gold-bg:rgba(0,212,255,.08);
+  --gold-bd:rgba(0,212,255,.24);
   --white:#edf4ff;
   --soft:#c8d2e2;
   --muted:#7b8798;
-  --muted2:#4f5b6d;
-
   --green:#22d98a;
   --red:#ff4d6a;
   --amber:#ffb020;
-
   --rescue:#e07b39;
   --helper:#3db88a;
   --close:#4a9edd;
   --cdat:#9b6fe0;
-
-  --shadow:0 18px 45px rgba(0,0,0,.28);
-  --shadow-soft:0 10px 28px rgba(0,0,0,.20);
 }
 
-*,*::before,*::after {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
 
-html {
-  scroll-behavior:smooth;
-}
+html { scroll-behavior:smooth; }
 
 body {
   min-height:100vh;
@@ -60,7 +43,7 @@ body {
   color:var(--white);
   font-family:'DM Sans',sans-serif;
   font-size:15px;
-  line-height:1.6;
+  line-height:1.65;
   -webkit-font-smoothing:antialiased;
 }
 
@@ -68,9 +51,9 @@ body {
 .hero {
   position:relative;
   overflow:hidden;
-  padding:28px 18px 30px;
+  padding:30px 20px 32px;
   background:
-    linear-gradient(135deg, rgba(0,212,255,.08), transparent 34%),
+    linear-gradient(135deg, rgba(0,212,255,.08), transparent 36%),
     linear-gradient(180deg, #101827 0%, #0b1018 100%);
   border-bottom:1px solid rgba(0,212,255,.18);
 }
@@ -84,7 +67,7 @@ body {
     linear-gradient(rgba(0,212,255,.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0,212,255,.035) 1px, transparent 1px);
   background-size:42px 42px;
-  mask-image:linear-gradient(to bottom, black, transparent 90%);
+  mask-image:linear-gradient(to bottom, black, transparent 88%);
 }
 
 .hero::after {
@@ -94,15 +77,18 @@ body {
   bottom:0;
   width:100%;
   height:3px;
-  background:linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+  background:linear-gradient(90deg, transparent, var(--gold), var(--gold2), transparent);
 }
 
-.hero-inner {
+.hero-top,
+.hero-name,
+.hero-meta,
+.hero-kicker {
   position:relative;
   z-index:2;
-  width:100%;
   max-width:760px;
-  margin:0 auto;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .hero-top {
@@ -113,45 +99,42 @@ body {
   margin-bottom:18px;
 }
 
-.badge {
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:26px;
-  padding:6px 11px;
-  border-radius:999px;
-  background:rgba(0,212,255,.075);
-  border:1px solid rgba(0,212,255,.22);
-  color:var(--accent);
+.hero-badge {
   font-family:'DM Mono',monospace;
   font-size:9px;
   letter-spacing:.16em;
   text-transform:uppercase;
+  color:var(--gold);
+  background:var(--gold-bg);
+  border:1px solid var(--gold-bd);
+  padding:6px 11px;
+  border-radius:999px;
   white-space:nowrap;
 }
 
 .hero-kicker {
-  margin-bottom:6px;
   color:var(--muted);
   font-family:'DM Mono',monospace;
   font-size:10px;
   letter-spacing:.18em;
   text-transform:uppercase;
+  margin-bottom:6px;
 }
 
 .hero-name {
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(50px, 12vw, 86px);
+  font-size:clamp(50px,12vw,86px);
   line-height:.9;
   letter-spacing:.025em;
+  color:var(--white);
   text-shadow:0 12px 38px rgba(0,212,255,.13);
   animation:nameReveal .55s ease both;
 }
 
 .hero-name span {
   display:block;
-  color:var(--accent);
-  font-size:clamp(24px, 5.4vw, 40px);
+  color:var(--gold);
+  font-size:clamp(24px,5.4vw,40px);
   letter-spacing:.07em;
 }
 
@@ -160,13 +143,6 @@ body {
   display:flex;
   flex-wrap:wrap;
   gap:8px;
-}
-
-.meta-pill {
-  padding:6px 10px;
-  border-radius:999px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
   color:var(--soft);
   font-family:'DM Mono',monospace;
   font-size:9px;
@@ -174,7 +150,14 @@ body {
   text-transform:uppercase;
 }
 
-/* MAIN */
+.hero-meta span {
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+/* WRAPPER */
 .wrapper {
   width:100%;
   max-width:760px;
@@ -182,8 +165,9 @@ body {
   padding:0 16px 76px;
 }
 
+/* SECTION */
 .section {
-  margin-top:24px;
+  margin-top:26px;
   opacity:0;
   transform:translateY(12px);
   transition:opacity .38s ease, transform .38s ease;
@@ -199,7 +183,7 @@ body {
   align-items:center;
   gap:11px;
   margin-bottom:10px;
-  color:var(--accent);
+  color:var(--gold);
   font-family:'DM Mono',monospace;
   font-size:9.5px;
   letter-spacing:.24em;
@@ -217,13 +201,13 @@ body {
 .card {
   position:relative;
   overflow:hidden;
-  padding:18px;
-  border-radius:18px;
   background:
     linear-gradient(180deg, rgba(255,255,255,.035), transparent),
     var(--card);
   border:1px solid var(--border);
-  box-shadow:var(--shadow-soft);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 12px 34px rgba(0,0,0,.24);
 }
 
 .card.primary {
@@ -232,36 +216,36 @@ body {
   background:
     radial-gradient(circle at top right, rgba(0,212,255,.16), transparent 18rem),
     linear-gradient(180deg, #152033 0%, #101724 100%);
-  box-shadow:var(--shadow);
+  box-shadow:0 18px 45px rgba(0,0,0,.30);
 }
 
 .card-title {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:15px;
-  color:var(--accent);
   font-family:'Bebas Neue',sans-serif;
   font-size:18px;
   letter-spacing:.075em;
+  color:var(--gold);
+  margin-bottom:15px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
 .ci {
   width:26px;
   height:26px;
   flex-shrink:0;
+  background:var(--gold-bg);
+  border:1px solid var(--gold-bd);
+  border-radius:8px;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:8px;
-  background:var(--accent-bg);
-  border:1px solid var(--accent-bd);
 }
 
 .ci svg {
   width:13px;
   height:13px;
-  stroke:var(--accent);
+  stroke:var(--gold);
   fill:none;
   stroke-width:2;
   stroke-linecap:round;
@@ -274,11 +258,13 @@ body {
   border-bottom:1px solid rgba(255,255,255,.075);
 }
 
-.assignment-kicker {
+.assignment-kicker,
+.quick-label,
+.stat-lbl {
   color:var(--muted);
   font-family:'DM Mono',monospace;
-  font-size:9px;
-  letter-spacing:.2em;
+  font-size:8.5px;
+  letter-spacing:.17em;
   text-transform:uppercase;
 }
 
@@ -292,10 +278,10 @@ body {
 
 .assignment-route {
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(48px, 13vw, 82px);
+  font-size:clamp(48px,13vw,82px);
   line-height:.92;
   letter-spacing:.045em;
-  color:var(--accent);
+  color:var(--gold);
   text-shadow:0 8px 32px rgba(0,212,255,.18);
   word-break:break-word;
 }
@@ -309,17 +295,19 @@ body {
   font-size:9px;
   letter-spacing:.12em;
   text-transform:uppercase;
+  color:var(--gold);
+  background:var(--gold-bg);
+  border:1px solid var(--gold-bd);
 }
 
-.route-type-badge.rescue { color:var(--rescue); background:rgba(224,123,57,.12); border:1px solid rgba(224,123,57,.30); }
-.route-type-badge.helper { color:var(--helper); background:rgba(61,184,138,.12); border:1px solid rgba(61,184,138,.30); }
-.route-type-badge.close  { color:var(--close);  background:rgba(74,158,221,.12); border:1px solid rgba(74,158,221,.30); }
-.route-type-badge.cdat   { color:var(--cdat);   background:rgba(155,111,224,.12); border:1px solid rgba(155,111,224,.30); }
-.route-type-badge.default{ color:var(--accent); background:var(--accent-bg); border:1px solid var(--accent-bd); }
+.route-type-badge.rescue { color:var(--rescue); background:rgba(224,123,57,.12); border-color:rgba(224,123,57,.30); }
+.route-type-badge.helper { color:var(--helper); background:rgba(61,184,138,.12); border-color:rgba(61,184,138,.30); }
+.route-type-badge.close  { color:var(--close);  background:rgba(74,158,221,.12); border-color:rgba(74,158,221,.30); }
+.route-type-badge.cdat   { color:var(--cdat);   background:rgba(155,111,224,.12); border-color:rgba(155,111,224,.30); }
 
 .quick-grid {
   display:grid;
-  grid-template-columns:repeat(3, 1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:1px;
   background:rgba(255,255,255,.075);
 }
@@ -329,16 +317,6 @@ body {
   background:rgba(8,12,19,.42);
 }
 
-.quick-label,
-.stat-lbl {
-  margin-bottom:5px;
-  color:var(--muted);
-  font-family:'DM Mono',monospace;
-  font-size:8.5px;
-  letter-spacing:.17em;
-  text-transform:uppercase;
-}
-
 .quick-val,
 .stat-val {
   color:var(--white);
@@ -346,11 +324,12 @@ body {
   font-size:30px;
   line-height:1;
   letter-spacing:.035em;
+  margin-top:5px;
 }
 
-.quick-val.accent,
+.quick-val.gold,
 .stat-val.gold {
-  color:var(--accent);
+  color:var(--gold);
 }
 
 .quick-val.sm,
@@ -361,12 +340,12 @@ body {
 /* STATS */
 .stat-grid {
   display:grid;
-  grid-template-columns:repeat(2, 1fr);
+  grid-template-columns:repeat(2,1fr);
   gap:9px;
 }
 
 .stat-grid.three {
-  grid-template-columns:repeat(3, 1fr);
+  grid-template-columns:repeat(3,1fr);
 }
 
 .stat-item {
@@ -378,8 +357,8 @@ body {
 }
 
 .stat-item.accent {
-  background:var(--accent-bg);
-  border-color:var(--accent-bd);
+  background:var(--gold-bg);
+  border-color:var(--gold-bd);
 }
 
 /* DIFFICULTY */
@@ -395,7 +374,7 @@ body {
   margin-bottom:10px;
 }
 
-.diff-title {
+.diff-label-row span {
   color:var(--muted);
   font-family:'DM Mono',monospace;
   font-size:9px;
@@ -403,7 +382,7 @@ body {
   text-transform:uppercase;
 }
 
-.diff-value {
+.diff-label-row strong {
   color:var(--white);
   font-family:'Bebas Neue',sans-serif;
   font-size:34px;
@@ -427,9 +406,9 @@ body {
 .diff-track {
   width:100%;
   height:9px;
-  overflow:hidden;
-  border-radius:999px;
   background:rgba(255,255,255,.08);
+  border-radius:999px;
+  overflow:hidden;
 }
 
 .diff-fill {
@@ -444,12 +423,12 @@ body {
 
 .detail-row {
   display:grid;
-  grid-template-columns:repeat(3, 1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:9px;
   margin-top:14px;
 }
 
-/* STATE */
+/* LOADING / ERROR */
 .state-box {
   padding:48px 22px;
   text-align:center;
@@ -467,7 +446,7 @@ body {
 .state-box .big {
   display:block;
   margin-bottom:8px;
-  color:var(--accent);
+  color:var(--gold);
   font-family:'Bebas Neue',sans-serif;
   font-size:58px;
   line-height:1;
@@ -479,7 +458,7 @@ body {
   margin:0 auto 14px;
   border-radius:50%;
   border:3px solid rgba(255,255,255,.10);
-  border-top-color:var(--accent);
+  border-top-color:var(--gold);
   animation:spin .75s linear infinite;
 }
 
@@ -493,112 +472,51 @@ body {
 }
 
 .footer-logo {
-  margin-bottom:4px;
-  color:var(--white);
   font-family:'Bebas Neue',sans-serif;
   font-size:25px;
   letter-spacing:.06em;
+  color:var(--white);
+  margin-bottom:4px;
 }
 
 .footer-logo span {
-  color:var(--accent);
+  color:var(--gold);
 }
 
 /* RESPONSIVE */
 @media(max-width:560px) {
-  .hero {
-    padding:24px 16px 28px;
-  }
+  .hero { padding:24px 16px 28px; }
+  .hero-badge { font-size:8px; letter-spacing:.13em; padding:5px 9px; }
+  .wrapper { padding:0 12px 70px; }
+  .section { margin-top:20px; }
+  .card { border-radius:16px; padding:16px; }
 
-  .hero-top {
-    align-items:flex-start;
-  }
-
-  .badge {
-    font-size:8px;
-    letter-spacing:.13em;
-    padding:5px 9px;
-  }
-
-  .wrapper {
-    padding:0 12px 70px;
-  }
-
-  .section {
-    margin-top:20px;
-  }
-
-  .card {
-    border-radius:16px;
-    padding:16px;
-  }
-
-  .assignment-head {
-    padding:18px 15px 14px;
-  }
-
+  .assignment-head { padding:18px 15px 14px; }
   .assignment-route-row {
     align-items:flex-start;
     flex-direction:column;
     gap:4px;
   }
+  .route-type-badge { margin-bottom:0; }
 
-  .route-type-badge {
-    margin-bottom:0;
-  }
-
-  .quick-grid {
-    grid-template-columns:1fr;
-  }
-
-  .quick-item {
-    padding:14px 15px;
-  }
+  .quick-grid { grid-template-columns:1fr; }
+  .quick-item { padding:14px 15px; }
 
   .stat-grid,
   .stat-grid.three,
   .detail-row {
     grid-template-columns:1fr 1fr;
   }
-
-  .stat-item {
-    padding:14px;
-  }
 }
 
 @media(max-width:380px) {
-  .hero-name {
-    font-size:46px;
-  }
-
-  .assignment-route {
-    font-size:46px;
-  }
-
+  .hero-name { font-size:46px; }
+  .assignment-route { font-size:46px; }
   .quick-val,
-  .stat-val {
-    font-size:26px;
-  }
+  .stat-val { font-size:26px; }
 }
 
-@media(min-width:700px) {
-  .hero {
-    padding:34px 24px 36px;
-  }
-
-  .wrapper {
-    padding:0 24px 90px;
-  }
-
-  .section {
-    margin-top:28px;
-  }
-}
-
-@keyframes spin {
-  to { transform:rotate(360deg); }
-}
-
+@keyframes spin { to { transform:rotate(360deg); } }
 @keyframes nameReveal {
   from { opacity:0; transform:translateY(10px); }
   to { opacity:1; transform:none; }
@@ -609,23 +527,21 @@ body {
 <body>
 
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-top">
-      <div class="badge">DSJ5 · Driver Gameplan</div>
-      <div class="badge" id="dateBadge"></div>
-    </div>
+  <div class="hero-top">
+    <div class="hero-badge">DSJ5 · Driver Gameplan</div>
+    <div class="hero-badge" id="dateBadge"></div>
+  </div>
 
-    <div class="hero-kicker">Today’s Gameplan</div>
+  <div class="hero-kicker">Today’s Gameplan</div>
 
-    <div class="hero-name" id="heroName">
-      <span>Loading...</span>
-    </div>
+  <div class="hero-name" id="heroName">
+    <span>Loading...</span>
+  </div>
 
-    <div class="hero-meta">
-      <div class="meta-pill">DSJ5</div>
-      <div class="meta-pill">Fresno, CA</div>
-      <div class="meta-pill">On The Level Logistics</div>
-    </div>
+  <div class="hero-meta">
+    <span>DSJ5</span>
+    <span>Fresno, CA</span>
+    <span>On The Level Logistics</span>
   </div>
 </section>
 
@@ -694,16 +610,16 @@ function render(data) {
   var gp = data.gameplan || {};
   var rh = data.route || {};
 
-  var name  = str(gp.name)  || 'Driver';
+  var name = str(gp.name) || 'Driver';
   var route = str(gp.route) || '';
-  var van   = str(gp.van)   || '';
-  var wave  = str(gp.wave)  || '';
+  var van = str(gp.van) || '';
+  var wave = str(gp.wave) || '';
   var stops = str(gp.stops) || '';
-  var rts   = str(gp.rts)   || '';
+  var rts = str(gp.rts) || '';
 
-  var nameParts = name.split(' ');
-  var firstName = nameParts[0] || name;
-  var lastName = nameParts.slice(1).join(' ');
+  var parts = name.split(' ');
+  var firstName = parts[0] || name;
+  var lastName = parts.slice(1).join(' ');
 
   document.getElementById('heroName').innerHTML =
     '<span>' + esc(firstName) + '</span>' +
@@ -717,31 +633,21 @@ function render(data) {
   var rawNum = parseFloat(diffRaw.replace('%',''));
   var diff = (!isNaN(rawNum) && rawNum > 0 && rawNum <= 1) ? rawNum * 100 : rawNum;
   var diffPct = isNaN(diff) ? null : diff;
+  var diffClass = diffPct === null ? '' : (diffPct < 40 ? 'low' : diffPct < 70 ? 'medium' : 'high');
+  var diffText = diffPct === null ? '' : (diffPct < 40 ? 'Light' : diffPct < 70 ? 'Moderate' : 'Heavy');
 
-  var diffClass = '';
-  var diffText = '';
-
-  if (diffPct !== null) {
-    diffClass = diffPct < 40 ? 'low' : diffPct < 70 ? 'medium' : 'high';
-    diffText = diffPct < 40 ? 'Light' : diffPct < 70 ? 'Moderate' : 'Heavy';
-  }
-
-  var rClass = routeClass(routeLabel);
   var html = '';
 
-  // ── PRIMARY ASSIGNMENT ─────────────────────────────────────
   html += '<div class="section">';
   html += '<div class="section-label">Today\'s Assignment</div>';
-
   html += '<div class="card primary">';
+
   html += '<div class="assignment-head">';
   html += '<div class="assignment-kicker">Route / Assignment</div>';
-
   html += '<div class="assignment-route-row">';
   html += '<div class="assignment-route">' + esc(route || '—') + '</div>';
-  html += '<div class="route-type-badge ' + rClass + '">' + esc(routeTypeLabel(routeLabel)) + '</div>';
+  html += '<div class="route-type-badge ' + routeClass(routeLabel) + '">' + esc(routeTypeLabel(routeLabel)) + '</div>';
   html += '</div>';
-
   html += '</div>';
 
   html += '<div class="quick-grid">';
@@ -753,14 +659,13 @@ function render(data) {
   html += '</div>';
   html += '</div>';
 
-  // ── ROUTE PROFILE ──────────────────────────────────────────
   var hasRouteData = diffPct !== null || bizStops || apts || stops;
 
   if (hasRouteData) {
     html += '<div class="section">';
     html += '<div class="section-label">Route Profile</div>';
-
     html += '<div class="card">';
+
     html += '<div class="card-title">';
     html += '<span class="ci"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>';
     html += 'Route Details';
@@ -769,16 +674,10 @@ function render(data) {
     if (diffPct !== null) {
       html += '<div class="diff-section">';
       html += '<div class="diff-label-row">';
-      html += '<div>';
-      html += '<div class="diff-title">Route Difficulty</div>';
-      html += '<div class="diff-tag">' + esc(diffText) + '</div>';
+      html += '<div><span>Route Difficulty</span><br><div class="diff-tag">' + esc(diffText) + '</div></div>';
+      html += '<strong>' + diffPct.toFixed(0) + '%</strong>';
       html += '</div>';
-      html += '<div class="diff-value">' + diffPct.toFixed(0) + '%</div>';
-      html += '</div>';
-
-      html += '<div class="diff-track">';
-      html += '<div class="diff-fill ' + diffClass + '" style="width:' + Math.min(Math.max(diffPct, 0), 100) + '%"></div>';
-      html += '</div>';
+      html += '<div class="diff-track"><div class="diff-fill ' + diffClass + '" style="width:' + Math.min(Math.max(diffPct,0),100) + '%"></div></div>';
       html += '</div>';
     }
 
@@ -793,88 +692,68 @@ function render(data) {
   }
 
   document.getElementById('mainContent').innerHTML = html;
-
   runAnimations();
 }
 
 // ── HELPERS ──────────────────────────────────────────────────
-function quickItem(label, val, accent) {
-  var valueClass = accent ? ' accent' : '';
-  var smallClass = String(val).length > 7 ? ' sm' : '';
-
+function quickItem(label, val, gold) {
   return '<div class="quick-item">' +
     '<div class="quick-label">' + esc(label) + '</div>' +
-    '<div class="quick-val' + valueClass + smallClass + '">' + esc(val) + '</div>' +
+    '<div class="quick-val' + (gold ? ' gold' : '') + (String(val).length > 7 ? ' sm' : '') + '">' + esc(val) + '</div>' +
     '</div>';
 }
 
 function statItem(label, val, valClass) {
-  var isAccent = valClass === 'gold';
-  var smallClass = String(val).length > 7 ? ' sm' : '';
-
-  return '<div class="stat-item' + (isAccent ? ' accent' : '') + '">' +
+  return '<div class="stat-item' + (valClass === 'gold' ? ' accent' : '') + '">' +
     '<div class="stat-lbl">' + esc(label) + '</div>' +
-    '<div class="stat-val' + (valClass ? ' ' + valClass : '') + smallClass + '">' + esc(val) + '</div>' +
+    '<div class="stat-val' + (valClass ? ' ' + valClass : '') + (String(val).length > 7 ? ' sm' : '') + '">' + esc(val) + '</div>' +
     '</div>';
 }
 
 function routeClass(route) {
   var r = str(route).toLowerCase();
-
-  if (r === 'rescue' || r.includes('rescue')) return 'rescue';
+  if (r.includes('rescue')) return 'rescue';
   if (r.includes('helper')) return 'helper';
-  if (r === 'close' || r.includes('close')) return 'close';
-  if (r === 'cdat' || r.includes('cdat')) return 'cdat';
-
+  if (r.includes('close')) return 'close';
+  if (r.includes('cdat')) return 'cdat';
   return 'default';
 }
 
 function routeTypeLabel(route) {
   var r = str(route).toLowerCase();
-
-  if (r === 'rescue' || r.includes('rescue')) return 'Rescue';
+  if (r.includes('rescue')) return 'Rescue';
   if (r.includes('helper')) return 'Helper';
-  if (r === 'close' || r.includes('close')) return 'Close';
-  if (r === 'cdat' || r.includes('cdat')) return 'CDAT';
-
+  if (r.includes('close')) return 'Close';
+  if (r.includes('cdat')) return 'CDAT';
   return 'Assigned';
 }
 
 function renderError(title, msg) {
   document.getElementById('heroName').innerHTML = '<span>Not Found</span>';
-
   document.getElementById('mainContent').innerHTML =
-    '<div class="section visible" style="margin-top:24px;">' +
-      '<div class="card">' +
-        '<div class="state-box">' +
-          '<span class="big">!</span>' +
-          '<strong>' + esc(title) + '</strong><br>' +
-          '<span>' + esc(msg) + '</span>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
+    '<div class="section visible" style="margin-top:24px;"><div class="card"><div class="state-box">' +
+    '<span class="big">!</span>' +
+    '<strong>' + esc(title) + '</strong><br>' +
+    '<span>' + esc(msg) + '</span>' +
+    '</div></div></div>';
 }
 
 function runAnimations() {
   if (!('IntersectionObserver' in window)) {
-    document.querySelectorAll('.section').forEach(function (s) {
-      s.classList.add('visible');
-    });
+    document.querySelectorAll('.section').forEach(function (s) { s.classList.add('visible'); });
     return;
   }
 
-  var obs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold:0.05 });
+  }, { threshold:.05 });
 
-  document.querySelectorAll('.section').forEach(function (s) {
-    obs.observe(s);
-  });
+  document.querySelectorAll('.section').forEach(function(s) { obs.observe(s); });
 }
 
 function str(v) {
