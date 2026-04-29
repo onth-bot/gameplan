@@ -383,17 +383,11 @@ function render(data) {
   html += 'Assignment Details';
   html += '</div>';
 
-  // Route header — larger display
-  if (route) {
-    html += '<div class="route-hero">' + esc(route) + '</div>';
-    html += '<div class="route-type-badge ' + routeClass(route) + '" style="display:inline-block;margin-bottom:18px;">' + esc(routeClass(route) === 'default' ? route : routeClass(route).toUpperCase()) + '</div>';
-  }
-
-  // Core stats grid: Route/Assignment | Bag/Van | Wave Time
-  html += '<div class="stat-grid three">';
+  // Bag/Van | Wave Time | Route/Assignment
+  html += '<div class="stat-grid three" style="margin-top:4px;">';
   html += statItem('Route / Assignment', route || '—', route ? 'gold' : '');
-  html += statItem('Bag / Van',          van   || '—', '');
-  html += statItem('Wave Time',          wave  || '—', wave ? 'gold' : '');
+  html += statItem('Bag / Van',  van  || '—', '');
+  html += statItem('Wave Time',  wave || '—', wave ? 'gold' : '');
   html += '</div>';
 
   html += '<div class="stat-grid" style="margin-top:8px;">';
