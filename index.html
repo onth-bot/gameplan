@@ -643,7 +643,7 @@ function render(data) {
   var van   = str(gp.van)   || '';
   var wave  = str(gp.wave)  || '';
   var stops = str(gp.stops) || '';
-  var rts   = gp.rts ? fractionalDayToTime(parseFloat(gp.rts)) : '';
+  var rts   = str(gp.rts) || '';
   var esph  = str(gp.esph)  || '';
 
   var parts     = name.split(' ');
